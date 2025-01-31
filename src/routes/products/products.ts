@@ -6,8 +6,8 @@ const router = Router()
 router.get('/products', async (req, res) => {
   try {
 
-    const [rows] = await pool.query('SELECT * FROM products')
-    res.json(rows)
+    const [products] = await pool.query('SELECT * FROM products')
+    res.json(products)
 
   } catch (error) {
 
@@ -22,13 +22,13 @@ router.get('/products/:id', async (req: any, res: any) => {
 
   try {
 
-    const [rows]: any = await pool.query('SELECT * FROM products WHERE id = ?', [id])
+    const [products]: any = await pool.query('SELECT * FROM products WHERE id = ?', [id])
 
-    if (rows.length === 0) {
+    if (products.length === 0) {
       return res.status(404).json({ message: 'Product not found' })
     }
 
-    res.json(rows)
+    res.json(products)
 
   } catch (error) {
 
